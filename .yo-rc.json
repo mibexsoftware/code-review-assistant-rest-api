@@ -1,0 +1,11 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": true,
+    "importedSpec": "/Users/michael/Projects/mira/cra-stash/generated/swagger-ui/swagger.yaml",
+    "name": "Code Review Assistant for Bitbucket Server REST",
+    "repo": "mira/code-review-assistant",
+    "splitSpec": false,
+    "samples": true,
+    "installSwaggerUI": false
+  }
+}

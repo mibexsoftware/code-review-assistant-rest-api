@@ -1,0 +1,496 @@
+---
+swagger: "2.0"
+info:
+  description: "REST API documentation for the plug-in Code Review Assistant for Bitbucket\
+    \ Server.\n                                    The REST API allows you to maintain\
+    \ the repository settings of the\n                                    plug-in\
+    \ as well as the repo-level and global custom static analyzer configurations.\n\
+    \                                    The plug-in differentiates between built-in\
+    \  and custom\n                                    (user-defined) static analyzer\
+    \ configurations.\n                                    With repository settings\
+    \ you can specify the behaviour of the plug-in for each\n                    \
+    \                repository individually. Global static analyzer configurations\
+    \ allow\n                                    you to share common analyzer configurations\
+    \ across all your repositories."
+  version: "v1"
+  title: "Code Review Assistant for Bitbucket Server REST API"
+  contact:
+    name: "Mibex Software GmbH"
+    url: "https://www.mibexsoftware.com"
+  license:
+    name: "Copyright (c) 2018 by Mibex Software GmbH, Switzerland. All rights reserved."
+    url: "https://mibexsoftware.com/imprint/"
+host: "YOUR_BITBUCKET_SERVER"
+basePath: "/rest/cra/1.0"
+tags:
+- name: "Global static analyzer configurations"
+- name: "Repository custom static analyzer configurations"
+- name: "Repository settings"
+schemes:
+- "http"
+- "https"
+paths:
+  /global-checker-configs:
+    get:
+      tags:
+      - "Global static analyzer configurations"
+      summary: "Returns the global static analyzer configurations."
+      description: ""
+      operationId: "getGlobalStaticAnalyzerConfigurations"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Global static analyzer configurations found"
+        401:
+          description: "The currently authenticated user does not have ADMIN credentials"
+    post:
+      tags:
+      - "Global static analyzer configurations"
+      summary: "Creates a global static analyzer configuration."
+      description: ""
+      operationId: "createGlobalStaticAnalyzerConfiguration"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Global static analyzer configuration"
+        required: true
+        schema:
+          $ref: "#/definitions/CustomCheckerConfig"
+      responses:
+        200:
+          description: "Global static analyzer configuration updated"
+        401:
+          description: "The currently authenticated user does not have ADMIN credentials"
+        404:
+          description: "The global static analyzer configuration does not exist"
+    put:
+      tags:
+      - "Global static analyzer configurations"
+      summary: "Updates a global static analyzer configuration."
+      description: ""
+      operationId: "updateGlobalStaticAnalyzerConfiguration"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Global static analyzer configuration"
+        required: true
+        schema:
+          $ref: "#/definitions/CustomCheckerConfig"
+      responses:
+        200:
+          description: "Global static analyzer configuration updated"
+        401:
+          description: "The currently authenticated user does not have ADMIN credentials"
+        404:
+          description: "The global static analyzer configuration does not exist"
+    delete:
+      tags:
+      - "Global static analyzer configurations"
+      summary: "Deletes a global static analyzer configuration."
+      description: ""
+      operationId: "deleteGlobalStaticAnalyzerConfiguration"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "Global static analyzer configuration deleted"
+        401:
+          description: "The currently authenticated user does not have ADMIN credentials"
+        404:
+          description: "The global static analyzer configuration does not exist"
+  /projects/{projectKey}/repos/{repositorySlug}/checker-configs:
+    get:
+      tags:
+      - "Repository custom static analyzer configurations"
+      summary: "Returns the repository static analyzer configurations."
+      description: ""
+      operationId: "getRepoStaticAnalyzerConfigurations"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectKey"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "repositorySlug"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Repository static analyzer configurations found"
+        401:
+          description: "The currently authenticated user does not have REPO_ADMIN\
+            \ credentials"
+    post:
+      tags:
+      - "Repository custom static analyzer configurations"
+      summary: "Creates a repository static analyzer configuration."
+      description: ""
+      operationId: "createRepoStaticAnalyzerConfiguration"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectKey"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "repositorySlug"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "Repository static analyzer configuration"
+        required: true
+        schema:
+          $ref: "#/definitions/CustomCheckerConfig"
+      responses:
+        200:
+          description: "Repository static analyzer configuration updated"
+        401:
+          description: "The currently authenticated user does not have REPO_ADMIN\
+            \ credentials"
+        404:
+          description: "The repository static analyzer configuration does not exist"
+    put:
+      tags:
+      - "Repository custom static analyzer configurations"
+      summary: "Updates a repository static analyzer configuration."
+      description: ""
+      operationId: "updateRepoStaticAnalyzerConfiguration"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectKey"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "repositorySlug"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "Repository static analyzer configuration"
+        required: true
+        schema:
+          $ref: "#/definitions/CustomCheckerConfig"
+      responses:
+        200:
+          description: "Repository static analyzer configuration updated"
+        401:
+          description: "The currently authenticated user does not have REPO_ADMIN\
+            \ credentials"
+        404:
+          description: "The repository static analyzer configuration does not exist"
+    delete:
+      tags:
+      - "Repository custom static analyzer configurations"
+      summary: "Deletes a repository static analyzer configuration."
+      description: ""
+      operationId: "deleteRepoStaticAnalyzerConfiguration"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectKey"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "repositorySlug"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "Repository static analyzer configuration deleted"
+        401:
+          description: "The currently authenticated user does not have REPO_ADMIN\
+            \ credentials"
+        404:
+          description: "The repository static analyzer configuration does not exist"
+  /projects/{projectKey}/repos/{repositorySlug}/settings:
+    get:
+      tags:
+      - "Repository settings"
+      summary: "Returns the repository settings of the plug-in."
+      description: ""
+      operationId: "getRepositorySettings"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectKey"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "repositorySlug"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Repository settings found"
+        401:
+          description: "The currently authenticated user does not have REPO_ADMIN\
+            \ permissions"
+        404:
+          description: "The given repository does not exist or there are no settings\
+            \ for this repository"
+    post:
+      tags:
+      - "Repository settings"
+      summary: "Creates or updates the repository settings for the plug-in."
+      description: ""
+      operationId: "createOrUpdateRepositorySettings"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectKey"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "repositorySlug"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "Repository Settings"
+        required: true
+        schema:
+          $ref: "#/definitions/RestRepoConfig"
+      responses:
+        200:
+          description: "Repository settings saved"
+        400:
+          description: "Invalid parameters or mandatory parameters not passed"
+        401:
+          description: "The currently authenticated user does not have REPO_ADMIN\
+            \ permissions"
+        404:
+          description: "The given repository does not exist or there are no settings\
+            \ for this repository"
+    delete:
+      tags:
+      - "Repository settings"
+      summary: "Deletes repository settings for the plug-in."
+      description: ""
+      operationId: "deleteRepositorySettings"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projectKey"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "repositorySlug"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Repository configuration deleted"
+        401:
+          description: "The currently authenticated user does not have REPO_ADMIN\
+            \ permissions"
+        404:
+          description: "The given repository does not exist or there are no settings\
+            \ for this repository"
+definitions:
+  CustomCheckerConfig:
+    type: "object"
+    properties:
+      globalAnalyzerId:
+        type: "integer"
+        format: "int32"
+        description: "Reference a global analyzer configuration. Only possible when\
+          \ used on the repository level."
+      name:
+        type: "string"
+        description: "This name will be used to report violations in the code of your\
+          \ pull requests."
+      maxMergeErrors:
+        type: "integer"
+        format: "int32"
+        description: "This is the maximum number of reported violations with severity\
+          \ ERROR or FATAL allowed to merge a pull request. Leave empty to always\
+          \ allow merging."
+      toolCommand:
+        type: "string"
+        description: "The path to the tool to invoke, can either be absolute (e.g.\
+          \ /usr/local/bin/jscs) or relative to the repository (e.g., ./node_modules/.bin/eslint)"
+      toolArguments:
+        type: "string"
+        description: "The arguments for the analyzer including a placeholder %f which\
+          \ will be replaced with the path to the file or %fs which will be replaced\
+          \ with a space-delimited list of all file paths to analyze (will only require\
+          \ one process to analyze your pull request compared to %f). Note that repository\
+          \ relative paths for config files etc. are also possible (see the following\
+          \ example where mycheckstyle.xml is taken from the repository). Example\
+          \ for using Checkstyle: -jar checkstyle-7.7-all.jar -c mycheckstyle.xml\
+          \ %fs"
+      issueParseRegex:
+        type: "string"
+        description: "A Java regular expression to parse the output of the tool. It\
+          \ should contain named groups for the severity level (if not provided you\
+          \ must specify a default severity below), the file path, the line number\
+          \ and the message. Example: (?<severity>.*?) (?<file>.*?):(?<line>\\d+):\\\
+          d+: (?<message>.*) will match \"ERROR /path/to/HelloWorld.java:26:27: 42\
+          \ is a magic number. [MagicNumber]\""
+      fileExtensionsToProcess:
+        type: "string"
+        description: "A list of file endings which should be analyzed, separated by\
+          \ whitespace. Example: js javascript"
+      defaultSeverity:
+        type: "string"
+        description: "If your custom analyzer does not support severity levels for\
+          \ found issues or if they do not match FATAL|ERROR|WARNING|INFO, you can\
+          \ define which default severity violations should have."
+        enum:
+        - "FATAL"
+        - "ERROR"
+        - "WARNING"
+        - "INFO"
+      id:
+        type: "integer"
+        format: "int32"
+        description: "ID of the custom analyzer configuration. Only necessary when\
+          \ updating/deleting a configuration."
+    xml:
+      name: "repoAnalyzer"
+  RestBuiltinAnalyzerConfig:
+    type: "object"
+    properties:
+      enabled:
+        type: "boolean"
+        description: "Only enabled checkers will be executed when your pull requests\
+          \ are analyzed."
+        default: false
+      name:
+        type: "string"
+        description: "This is the name of the built-in static analyzer."
+        enum:
+        - "PMD"
+        - "Scalastyle"
+        - "CodeNarc"
+        - "JSLint"
+        - "JSHint"
+      configFrom:
+        type: "string"
+        description: "Use either built-in configuration, one from a Git repository\
+          \ or one from an URL or path in the file system."
+        enum:
+        - "BUILTIN"
+        - "FROM_REPO"
+        - "FROM_URL"
+      configRepoPath:
+        type: "string"
+        description: "The relative path to the config file in this Git repository\
+          \ (e.g., config/tools/pmd-all.xml)."
+      configUrl:
+        type: "string"
+        description: "Provide an URL (e.g., https://github.com/pmd/pmd.xml) where\
+          \ the config can be fetched from or an absolute path (e.g., /home/bitbucket/pmd.xml)\
+          \ that is accessible in the filesystem you run Bitbucket Server on."
+      violationExamplesEnabled:
+        type: "boolean"
+        description: "Currently only supported by PMD; when enabled, shows examples\
+          \ for the found violations"
+        default: false
+      maxMergeErrors:
+        type: "integer"
+        format: "int32"
+        description: "This is the maximum number of reported violations with severity\
+          \ ERROR or FATAL allowed to merge a pull request. Leave empty to always\
+          \ allow merging."
+  RestRepoConfig:
+    type: "object"
+    properties:
+      ctagsEnabled:
+        type: "boolean"
+        description: "Code cross-reference allows you to lookup definitions of source\
+          \ code entities (e.g., classes, functions) by Ctrl + Click'ing on them in\
+          \ the pull request diff view."
+        default: false
+      bugPredictionEnabled:
+        type: "boolean"
+        description: "This marks files that have been recognized as hotspots in pull\
+          \ requests with a special comment that the reviewer should take extra care\
+          \ when reviewing this file. The plug-ins ranks files by the number of times\
+          \ they have been changed with a bug-fixing commit (i.e. a commit which fixes\
+          \ a bug) in the past and considers the top 10% as hotspots."
+        default: false
+      bugPredictionRegex:
+        type: "string"
+        description: "This text will be shown in the pull request comment for the\
+          \ reviewer when a file is considered as a hotspot."
+      bugPredictionAlertText:
+        type: "string"
+        description: "Commits with messages that contain matches for this regex will\
+          \ be considered as bug-fixing commits. Examples: \"fix(es|ed)?\" or \"fixes\
+          \ [A-Z]+-\\d+\"\n"
+      pullRequestTemplatesEnabled:
+        type: "boolean"
+        description: "Pull request templates allow you to define a template markdown\
+          \ text for pull request descriptions that help contributors to add the right\
+          \ details when they create a pull request. Just add a file PULL_REQUEST_TEMPLATE.md\
+          \ (or if you do not want to clutter the root directory of your project .bitbucket/PULL_REQUEST_TEMPLATE.md)\
+          \ to the default branch of your repository and enable this setting to get\
+          \ started."
+        default: false
+      showSeverityIcon:
+        type: "boolean"
+        description: "Show severity icon in pull request messages for detected code\
+          \ issues (takes more space compared to plain text severity)."
+        default: false
+      branchOptions:
+        type: "string"
+        description: "Configure which branches should be analyzed or which should\
+          \ be ignored (default is to analyze all branches)."
+        enum:
+        - "WHITE_LIST"
+        - "BLACK_LIST"
+      branchOptionsBranches:
+        type: "string"
+        description: "You can use patterns as known from Bitbucket's branch permissions\
+          \ (syntax reference). Use whitespace as delimiter. Example: release-* develop"
+      builtinCheckers:
+        type: "array"
+        description: "List of built-in static analyzers to use for pull requests of\
+          \ this repository."
+        items:
+          $ref: "#/definitions/RestBuiltinAnalyzerConfig"

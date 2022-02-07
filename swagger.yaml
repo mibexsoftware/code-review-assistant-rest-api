@@ -20,8 +20,8 @@ info:
 host: YOUR_BITBUCKET_SERVER
 basePath: /rest/cra/1.0
 tags:
-  - name: Global static analyzer configurations
-  - name: Repository custom static analyzer configurations
+  - name: Deprecated. Global static analyzer configurations
+  - name: Deprecated. Repository custom static analyzer configurations
   - name: Repository settings
 schemes:
   - http
@@ -30,7 +30,7 @@ paths:
   /global-checker-configs:
     get:
       tags:
-        - Global static analyzer configurations
+        - Deprecated. Global static analyzer configurations
       summary: Returns the global static analyzer configurations.
       description: ''
       operationId: getGlobalStaticAnalyzerConfigurations
@@ -46,7 +46,7 @@ paths:
           description: The currently authenticated user does not have ADMIN credentials
     post:
       tags:
-        - Global static analyzer configurations
+        - Deprecated. Global static analyzer configurations
       summary: Creates a global static analyzer configuration.
       description: ''
       operationId: createGlobalStaticAnalyzerConfiguration
@@ -69,7 +69,7 @@ paths:
           description: The global static analyzer configuration does not exist
     put:
       tags:
-        - Global static analyzer configurations
+        - Deprecated. Global static analyzer configurations
       summary: Updates a global static analyzer configuration.
       description: ''
       operationId: updateGlobalStaticAnalyzerConfiguration
@@ -92,7 +92,7 @@ paths:
           description: The global static analyzer configuration does not exist
     delete:
       tags:
-        - Global static analyzer configurations
+        - Deprecated. Global static analyzer configurations
       summary: Deletes a global static analyzer configuration.
       description: ''
       operationId: deleteGlobalStaticAnalyzerConfiguration
@@ -116,7 +116,7 @@ paths:
   '/projects/{projectKey}/repos/{repositorySlug}/checker-configs':
     get:
       tags:
-        - Repository custom static analyzer configurations
+        - Deprecated. Repository custom static analyzer configurations
       summary: Returns the repository static analyzer configurations.
       description: ''
       operationId: getRepoStaticAnalyzerConfigurations
@@ -140,7 +140,7 @@ paths:
           description: The currently authenticated user does not have REPO_ADMIN credentials
     post:
       tags:
-        - Repository custom static analyzer configurations
+        - Deprecated. Repository custom static analyzer configurations
       summary: Creates a repository static analyzer configuration.
       description: ''
       operationId: createRepoStaticAnalyzerConfiguration
@@ -171,7 +171,7 @@ paths:
           description: The repository static analyzer configuration does not exist
     put:
       tags:
-        - Repository custom static analyzer configurations
+        - Deprecated. Repository custom static analyzer configurations
       summary: Updates a repository static analyzer configuration.
       description: ''
       operationId: updateRepoStaticAnalyzerConfiguration
@@ -202,7 +202,7 @@ paths:
           description: The repository static analyzer configuration does not exist
     delete:
       tags:
-        - Repository custom static analyzer configurations
+        - Deprecated. Repository custom static analyzer configurations
       summary: Deletes a repository static analyzer configuration.
       description: ''
       operationId: deleteRepoStaticAnalyzerConfiguration
@@ -364,7 +364,6 @@ definitions:
       enabled:
         type: boolean
         description: Only enabled checkers will be executed when your pull requests are analyzed.
-        default: false
       name:
         type: string
         description: This is the name of the built-in static analyzer.
@@ -390,7 +389,6 @@ definitions:
       violationExamplesEnabled:
         type: boolean
         description: 'Currently only supported by PMD; when enabled, shows examples for the found violations'
-        default: false
       maxMergeErrors:
         type: integer
         format: int32
@@ -400,12 +398,10 @@ definitions:
     properties:
       ctagsEnabled:
         type: boolean
-        description: 'Code cross-reference allows you to lookup definitions of source code entities (e.g., classes, functions) by Ctrl + Click''ing on them in the pull request diff view.'
-        default: false
+        description: 'Deprecated. Code cross-reference allows you to lookup definitions of source code entities (e.g., classes, functions) by Ctrl + Click''ing on them in the pull request diff view.'
       bugPredictionEnabled:
         type: boolean
         description: This marks files that have been recognized as hotspots in pull requests with a special comment that the reviewer should take extra care when reviewing this file. The plug-ins ranks files by the number of times they have been changed with a bug-fixing commit (i.e. a commit which fixes a bug) in the past and considers the top 10% as hotspots.
-        default: false
       bugPredictionRegex:
         type: string
         description: This text will be shown in the pull request comment for the reviewer when a file is considered as a hotspot.
@@ -416,11 +412,12 @@ definitions:
       pullRequestTemplatesEnabled:
         type: boolean
         description: Pull request templates allow you to define a template markdown text for pull request descriptions that help contributors to add the right details when they create a pull request. Just add a file PULL_REQUEST_TEMPLATE.md (or if you do not want to clutter the root directory of your project .bitbucket/PULL_REQUEST_TEMPLATE.md) to the default branch of your repository and enable this setting to get started.
-        default: false
+      buildLogAnalysisEnabled:
+        type: boolean
+        description: Analyzes build logs to show build warnings in the pull request.
       showSeverityIcon:
         type: boolean
         description: Show severity icon in pull request messages for detected code issues (takes more space compared to plain text severity).
-        default: false
       branchOptions:
         type: string
         description: Configure which branches should be analyzed or which should be ignored (default is to analyze all branches).
@@ -432,6 +429,6 @@ definitions:
         description: 'You can use patterns as known from Bitbucket''s branch permissions (syntax reference). Use whitespace as delimiter. Example: release-* develop'
       builtinCheckers:
         type: array
-        description: List of built-in static analyzers to use for pull requests of this repository.
+        description: Deprecated. List of built-in static analyzers to use for pull requests of this repository.
         items:
           $ref: '#/definitions/RestBuiltinAnalyzerConfig'

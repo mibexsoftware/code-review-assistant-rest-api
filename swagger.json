@@ -17,10 +17,10 @@
   "basePath": "/rest/cra/1.0",
   "tags": [
     {
-      "name": "Global static analyzer configurations"
+      "name": "Deprecated. Global static analyzer configurations"
     },
     {
-      "name": "Repository custom static analyzer configurations"
+      "name": "Deprecated. Repository custom static analyzer configurations"
     },
     {
       "name": "Repository settings"
@@ -34,7 +34,7 @@
     "/global-checker-configs": {
       "get": {
         "tags": [
-          "Global static analyzer configurations"
+          "Deprecated. Global static analyzer configurations"
         ],
         "summary": "Returns the global static analyzer configurations.",
         "description": "",
@@ -57,7 +57,7 @@
       },
       "post": {
         "tags": [
-          "Global static analyzer configurations"
+          "Deprecated. Global static analyzer configurations"
         ],
         "summary": "Creates a global static analyzer configuration.",
         "description": "",
@@ -92,7 +92,7 @@
       },
       "put": {
         "tags": [
-          "Global static analyzer configurations"
+          "Deprecated. Global static analyzer configurations"
         ],
         "summary": "Updates a global static analyzer configuration.",
         "description": "",
@@ -127,7 +127,7 @@
       },
       "delete": {
         "tags": [
-          "Global static analyzer configurations"
+          "Deprecated. Global static analyzer configurations"
         ],
         "summary": "Deletes a global static analyzer configuration.",
         "description": "",
@@ -163,7 +163,7 @@
     "/projects/{projectKey}/repos/{repositorySlug}/checker-configs": {
       "get": {
         "tags": [
-          "Repository custom static analyzer configurations"
+          "Deprecated. Repository custom static analyzer configurations"
         ],
         "summary": "Returns the repository static analyzer configurations.",
         "description": "",
@@ -199,7 +199,7 @@
       },
       "post": {
         "tags": [
-          "Repository custom static analyzer configurations"
+          "Deprecated. Repository custom static analyzer configurations"
         ],
         "summary": "Creates a repository static analyzer configuration.",
         "description": "",
@@ -246,7 +246,7 @@
       },
       "put": {
         "tags": [
-          "Repository custom static analyzer configurations"
+          "Deprecated. Repository custom static analyzer configurations"
         ],
         "summary": "Updates a repository static analyzer configuration.",
         "description": "",
@@ -293,7 +293,7 @@
       },
       "delete": {
         "tags": [
-          "Repository custom static analyzer configurations"
+          "Deprecated. Repository custom static analyzer configurations"
         ],
         "summary": "Deletes a repository static analyzer configuration.",
         "description": "",
@@ -528,8 +528,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Only enabled checkers will be executed when your pull requests are analyzed.",
-          "default": false
+          "description": "Only enabled checkers will be executed when your pull requests are analyzed."
         },
         "name": {
           "type": "string",
@@ -561,8 +560,7 @@
         },
         "violationExamplesEnabled": {
           "type": "boolean",
-          "description": "Currently only supported by PMD; when enabled, shows examples for the found violations",
-          "default": false
+          "description": "Currently only supported by PMD; when enabled, shows examples for the found violations"
         },
         "maxMergeErrors": {
           "type": "integer",
@@ -576,13 +574,11 @@
       "properties": {
         "ctagsEnabled": {
           "type": "boolean",
-          "description": "Code cross-reference allows you to lookup definitions of source code entities (e.g., classes, functions) by Ctrl + Click'ing on them in the pull request diff view.",
-          "default": false
+          "description": "Deprecated. Code cross-reference allows you to lookup definitions of source code entities (e.g., classes, functions) by Ctrl + Click'ing on them in the pull request diff view."
         },
         "bugPredictionEnabled": {
           "type": "boolean",
-          "description": "This marks files that have been recognized as hotspots in pull requests with a special comment that the reviewer should take extra care when reviewing this file. The plug-ins ranks files by the number of times they have been changed with a bug-fixing commit (i.e. a commit which fixes a bug) in the past and considers the top 10% as hotspots.",
-          "default": false
+          "description": "This marks files that have been recognized as hotspots in pull requests with a special comment that the reviewer should take extra care when reviewing this file. The plug-ins ranks files by the number of times they have been changed with a bug-fixing commit (i.e. a commit which fixes a bug) in the past and considers the top 10% as hotspots."
         },
         "bugPredictionRegex": {
           "type": "string",
@@ -594,13 +590,15 @@
         },
         "pullRequestTemplatesEnabled": {
           "type": "boolean",
-          "description": "Pull request templates allow you to define a template markdown text for pull request descriptions that help contributors to add the right details when they create a pull request. Just add a file PULL_REQUEST_TEMPLATE.md (or if you do not want to clutter the root directory of your project .bitbucket/PULL_REQUEST_TEMPLATE.md) to the default branch of your repository and enable this setting to get started.",
-          "default": false
+          "description": "Pull request templates allow you to define a template markdown text for pull request descriptions that help contributors to add the right details when they create a pull request. Just add a file PULL_REQUEST_TEMPLATE.md (or if you do not want to clutter the root directory of your project .bitbucket/PULL_REQUEST_TEMPLATE.md) to the default branch of your repository and enable this setting to get started."
+        },
+        "buildLogAnalysisEnabled": {
+          "type": "boolean",
+          "description": "Analyzes build logs to show build warnings in the pull request."
         },
         "showSeverityIcon": {
           "type": "boolean",
-          "description": "Show severity icon in pull request messages for detected code issues (takes more space compared to plain text severity).",
-          "default": false
+          "description": "Show severity icon in pull request messages for detected code issues (takes more space compared to plain text severity)."
         },
         "branchOptions": {
           "type": "string",
@@ -616,7 +614,7 @@
         },
         "builtinCheckers": {
           "type": "array",
-          "description": "List of built-in static analyzers to use for pull requests of this repository.",
+          "description": "Deprecated. List of built-in static analyzers to use for pull requests of this repository.",
           "items": {
             "$ref": "#/definitions/RestBuiltinAnalyzerConfig"
           }

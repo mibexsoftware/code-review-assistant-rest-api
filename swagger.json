@@ -17,10 +17,10 @@
   "basePath": "/rest/cra/1.0",
   "tags": [
     {
-      "name": "Deprecated. Global static analyzer configurations"
+      "name": "(Deprecated) Global static analyzer configurations"
     },
     {
-      "name": "Deprecated. Repository custom static analyzer configurations"
+      "name": "(Deprecated) Repository custom static analyzer configurations"
     },
     {
       "name": "Repository settings"
@@ -34,7 +34,7 @@
     "/global-checker-configs": {
       "get": {
         "tags": [
-          "Deprecated. Global static analyzer configurations"
+          "(Deprecated) Global static analyzer configurations"
         ],
         "summary": "Returns the global static analyzer configurations.",
         "description": "",
@@ -57,7 +57,7 @@
       },
       "post": {
         "tags": [
-          "Deprecated. Global static analyzer configurations"
+          "(Deprecated) Global static analyzer configurations"
         ],
         "summary": "Creates a global static analyzer configuration.",
         "description": "",
@@ -92,7 +92,7 @@
       },
       "put": {
         "tags": [
-          "Deprecated. Global static analyzer configurations"
+          "(Deprecated) Global static analyzer configurations"
         ],
         "summary": "Updates a global static analyzer configuration.",
         "description": "",
@@ -127,7 +127,7 @@
       },
       "delete": {
         "tags": [
-          "Deprecated. Global static analyzer configurations"
+          "(Deprecated) Global static analyzer configurations"
         ],
         "summary": "Deletes a global static analyzer configuration.",
         "description": "",
@@ -163,7 +163,7 @@
     "/projects/{projectKey}/repos/{repositorySlug}/checker-configs": {
       "get": {
         "tags": [
-          "Deprecated. Repository custom static analyzer configurations"
+          "(Deprecated) Repository custom static analyzer configurations"
         ],
         "summary": "Returns the repository static analyzer configurations.",
         "description": "",
@@ -199,7 +199,7 @@
       },
       "post": {
         "tags": [
-          "Deprecated. Repository custom static analyzer configurations"
+          "(Deprecated) Repository custom static analyzer configurations"
         ],
         "summary": "Creates a repository static analyzer configuration.",
         "description": "",
@@ -246,7 +246,7 @@
       },
       "put": {
         "tags": [
-          "Deprecated. Repository custom static analyzer configurations"
+          "(Deprecated) Repository custom static analyzer configurations"
         ],
         "summary": "Updates a repository static analyzer configuration.",
         "description": "",
@@ -293,7 +293,7 @@
       },
       "delete": {
         "tags": [
-          "Deprecated. Repository custom static analyzer configurations"
+          "(Deprecated) Repository custom static analyzer configurations"
         ],
         "summary": "Deletes a repository static analyzer configuration.",
         "description": "",
@@ -574,27 +574,27 @@
       "properties": {
         "ctagsEnabled": {
           "type": "boolean",
-          "description": "Deprecated. Code cross-reference allows you to lookup definitions of source code entities (e.g., classes, functions) by Ctrl + Click'ing on them in the pull request diff view."
+          "description": "(Deprecated) Code cross-reference allows you to lookup definitions of source code entities (e.g., classes, functions) by Ctrl + Click'ing on them in the pull request diff view."
         },
         "bugPredictionEnabled": {
           "type": "boolean",
-          "description": "This marks files that have been recognized as hotspots in pull requests with a special comment that the reviewer should take extra care when reviewing this file. The plug-ins ranks files by the number of times they have been changed with a bug-fixing commit (i.e. a commit which fixes a bug) in the past and considers the top 10% as hotspots."
+          "description": "(Deprecated) This marks files that have been recognized as hotspots in pull requests with a special comment that the reviewer should take extra care when reviewing this file. The plug-ins ranks files by the number of times they have been changed with a bug-fixing commit (i.e. a commit which fixes a bug) in the past and considers the top 10% as hotspots."
         },
         "bugPredictionRegex": {
           "type": "string",
-          "description": "This text will be shown in the pull request comment for the reviewer when a file is considered as a hotspot."
+          "description": "(Deprecated) This text will be shown in the pull request comment for the reviewer when a file is considered as a hotspot."
         },
         "bugPredictionAlertText": {
           "type": "string",
-          "description": "Commits with messages that contain matches for this regex will be considered as bug-fixing commits. Examples: \"fix(es|ed)?\" or \"fixes [A-Z]+-\\d+\"\n"
+          "description": "(Deprecated) Commits with messages that contain matches for this regex will be considered as bug-fixing commits. Examples: \"fix(es|ed)?\" or \"fixes [A-Z]+-\\d+\"\n"
         },
         "pullRequestTemplatesEnabled": {
           "type": "boolean",
-          "description": "Pull request templates allow you to define a template markdown text for pull request descriptions that help contributors to add the right details when they create a pull request. Just add a file PULL_REQUEST_TEMPLATE.md (or if you do not want to clutter the root directory of your project .bitbucket/PULL_REQUEST_TEMPLATE.md) to the default branch of your repository and enable this setting to get started."
+          "description": "(Deprecated) Pull request templates allow you to define a template markdown text for pull request descriptions that help contributors to add the right details when they create a pull request. Just add a file PULL_REQUEST_TEMPLATE.md (or if you do not want to clutter the root directory of your project .bitbucket/PULL_REQUEST_TEMPLATE.md) to the default branch of your repository and enable this setting to get started."
         },
-        "buildLogAnalysisEnabled": {
+        "showCodeAnalysisInPullRequest": {
           "type": "boolean",
-          "description": "Analyzes build logs to show build warnings in the pull request."
+          "description": "Show Code Analyzes in PullRequest. Reads the build logs to extract the analyzers results."
         },
         "showSeverityIcon": {
           "type": "boolean",
@@ -614,7 +614,7 @@
         },
         "builtinCheckers": {
           "type": "array",
-          "description": "Deprecated. List of built-in static analyzers to use for pull requests of this repository.",
+          "description": "(Deprecated, use showCodeAnalysisInPullRequest instead) List of built-in static analyzers to use for pull requests of this repository.",
           "items": {
             "$ref": "#/definitions/RestBuiltinAnalyzerConfig"
           }

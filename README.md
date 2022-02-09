@@ -2,11 +2,10 @@
 
 ## Links
 
-- Documentation(ReDoc): https://mira.github.io/code-review-assistant/
+- Documentation(ReDoc): https://mibexsoftware.github.io/code-review-assistant-rest/
 - Look full spec:
-    + JSON https://mira.github.io/code-review-assistant/swagger.json
-    + YAML https://mira.github.io/code-review-assistant/swagger.yaml
-- Preview spec version for branch `[branch]`: https://mira.github.io/code-review-assistant/preview/[branch]
+    + JSON https://mibexsoftware.github.io/code-review-assistant-rest-api/swagger.json
+    + YAML https://mibexsoftware.github.io/code-review-assistant-rest-api/swagger.yaml
 
 **Warning:** All above links are updated only after Travis CI finishes deployment
 

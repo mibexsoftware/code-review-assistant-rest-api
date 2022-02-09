@@ -2,7 +2,7 @@
 
 ## Links
 
-- Documentation(ReDoc): https://mibexsoftware.github.io/code-review-assistant-rest/
+- Documentation(ReDoc): https://mibexsoftware.github.io/code-review-assistant-rest-api/
 - Look full spec:
     + JSON https://mibexsoftware.github.io/code-review-assistant-rest-api/swagger.json
     + YAML https://mibexsoftware.github.io/code-review-assistant-rest-api/swagger.yaml

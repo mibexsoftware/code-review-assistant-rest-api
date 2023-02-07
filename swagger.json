@@ -1,0 +1,536 @@
+{
+    "openapi" : "3.0.1",
+    "info" : {
+      "title" : "Code Review Assistant for Bitbucket Server REST API",
+      "description" : "REST API documentation for the plug-in Code Review Assistant for Bitbucket Server.\n                                    The REST API allows you to maintain the repository settings of the\n                                    plug-in as well as the repo-level and global custom static analyzer configurations.\n                                    The plug-in differentiates between built-in  and custom\n                                    (user-defined) static analyzer configurations.\n                                    With repository settings you can specify the behaviour of the plug-in for each\n                                    repository individually. Global static analyzer configurations allow\n                                    you to share common analyzer configurations across all your repositories.",
+      "contact" : {
+        "name" : "Mibex Software GmbH",
+        "url" : "https://www.mibexsoftware.com"
+      },
+      "license" : {
+        "name" : "Copyright (c) 2023 by Mibex Software GmbH, Switzerland. All rights reserved.",
+        "url" : "https://mibexsoftware.com/imprint/"
+      },
+      "version" : "v1"
+    },
+    "servers" : [ {
+      "url" : "https://YOUR_BITBUCKET_SERVER/rest/cra/1.0"
+    } ],
+    "paths" : {
+      "/global-checker-configs" : {
+        "get" : {
+          "tags" : [ "(Deprecated) Global static analyzer configurations" ],
+          "summary" : "Returns the global static analyzer configurations.",
+          "operationId" : "getGlobalCheckers",
+          "responses" : {
+            "200" : {
+              "description" : "Global static analyzer configurations found"
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have ADMIN permissions"
+            }
+          }
+        },
+        "put" : {
+          "tags" : [ "(Deprecated) Global static analyzer configurations" ],
+          "summary" : "Updates a global static analyzer configuration.",
+          "operationId" : "updateConfig",
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CustomCheckerConfig"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Global static analyzer configuration updated",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/CustomCheckerConfig"
+                  }
+                }
+              }
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have ADMIN permissions"
+            },
+            "404" : {
+              "description" : "The global static analyzer configuration does not exist"
+            }
+          }
+        },
+        "post" : {
+          "tags" : [ "(Deprecated) Global static analyzer configurations" ],
+          "summary" : "Creates a global static analyzer configuration.",
+          "operationId" : "addConfig",
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CustomCheckerConfig"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Global static analyzer configuration created",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/CustomCheckerConfig"
+                  }
+                }
+              }
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have ADMIN permissions"
+            },
+            "404" : {
+              "description" : "The global static analyzer configuration does not exist"
+            }
+          }
+        },
+        "delete" : {
+          "tags" : [ "(Deprecated) Global static analyzer configurations" ],
+          "summary" : "Deletes a global static analyzer configuration.",
+          "operationId" : "deleteConfig",
+          "parameters" : [ {
+            "name" : "id",
+            "in" : "query",
+            "schema" : {
+              "type" : "integer",
+              "format" : "int32"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Global static analyzer configuration has been deleted"
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have ADMIN permissions"
+            },
+            "404" : {
+              "description" : "The global static analyzer configuration does not exist"
+            }
+          }
+        }
+      },
+      "/projects/{projectKey}/repos/{repositorySlug}/checker-configs" : {
+        "get" : {
+          "tags" : [ "(Deprecated) Repository custom static analyzer configurations" ],
+          "summary" : "Returns the repository static analyzer configurations.",
+          "operationId" : "getRepoCustomCheckers",
+          "parameters" : [ {
+            "name" : "projectKey",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "repositorySlug",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Repository static analyzer configurations found"
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have REPO_ADMIN permissions"
+            }
+          }
+        },
+        "put" : {
+          "tags" : [ "(Deprecated) Repository custom static analyzer configurations" ],
+          "summary" : "Updates a repository static analyzer configuration.",
+          "operationId" : "updateConfig_1",
+          "parameters" : [ {
+            "name" : "projectKey",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "repositorySlug",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CustomCheckerConfig"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Repository static analyzer configuration updated",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/CustomCheckerConfig"
+                  }
+                }
+              }
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have REPO_ADMIN permissions"
+            },
+            "404" : {
+              "description" : "The repository static analyzer configuration does not exist"
+            }
+          }
+        },
+        "post" : {
+          "tags" : [ "(Deprecated) Repository custom static analyzer configurations" ],
+          "summary" : "Creates a repository static analyzer configuration.",
+          "operationId" : "addConfig_1",
+          "parameters" : [ {
+            "name" : "projectKey",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "repositorySlug",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CustomCheckerConfig"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Repository static analyzer configuration created",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/CustomCheckerConfig"
+                  }
+                }
+              }
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have REPO_ADMIN permissions"
+            },
+            "404" : {
+              "description" : "The repository static analyzer configuration does not exist"
+            }
+          }
+        },
+        "delete" : {
+          "tags" : [ "(Deprecated) Repository custom static analyzer configurations" ],
+          "summary" : "Deletes a repository static analyzer configuration.",
+          "operationId" : "deleteConfig_1",
+          "parameters" : [ {
+            "name" : "projectKey",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "repositorySlug",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "id",
+            "in" : "query",
+            "schema" : {
+              "type" : "integer",
+              "format" : "int32"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Repository static analyzer configuration deleted"
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have REPO_ADMIN permissions"
+            },
+            "404" : {
+              "description" : "The repository static analyzer configuration does not exist"
+            }
+          }
+        }
+      },
+      "/projects/{projectKey}/repos/{repositorySlug}/settings" : {
+        "get" : {
+          "tags" : [ "Repository settings" ],
+          "summary" : "Returns the repository settings of the plug-in.",
+          "operationId" : "getRepoSettings",
+          "parameters" : [ {
+            "name" : "projectKey",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "repositorySlug",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Repository settings found"
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have REPO_ADMIN permissions"
+            },
+            "404" : {
+              "description" : "The given repository does not exist or there are no settings for this repository"
+            }
+          }
+        },
+        "post" : {
+          "tags" : [ "Repository settings" ],
+          "summary" : "Creates or updates the repository settings for the plug-in.",
+          "operationId" : "createOrUpdateRepoSettings",
+          "parameters" : [ {
+            "name" : "projectKey",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "repositorySlug",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestRepoConfig"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Creates or updates the repository settings for the plug-in.",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/RestRepoConfig"
+                  }
+                }
+              }
+            },
+            "400" : {
+              "description" : "Invalid parameters or mandatory parameters not passed"
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have REPO_ADMIN permissions"
+            },
+            "404" : {
+              "description" : "The given repository does not exist or there are no settings for this repository"
+            }
+          }
+        },
+        "delete" : {
+          "tags" : [ "Repository settings" ],
+          "summary" : "Deletes repository settings for the plug-in.",
+          "operationId" : "deleteRepoSettings",
+          "parameters" : [ {
+            "name" : "projectKey",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "repositorySlug",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Repository configuration deletedfound"
+            },
+            "401" : {
+              "description" : "The currently authenticated user does not have REPO_ADMIN permissions"
+            },
+            "404" : {
+              "description" : "The given repository does not exist or there are no settings for this repository"
+            }
+          }
+        }
+      }
+    },
+    "components" : {
+      "schemas" : {
+        "CustomCheckerConfig" : {
+          "type" : "object",
+          "properties" : {
+            "defaultSeverity" : {
+              "type" : "string",
+              "description" : "If your custom analyzer does not support severity levels for found issues or if they do not match FATAL|ERROR|WARNING|INFO, you can define which default severity violations should have.",
+              "enum" : [ "FATAL", "ERROR", "WARNING", "INFO" ]
+            },
+            "fileExtensionsToProcess" : {
+              "type" : "string",
+              "description" : "A list of file endings which should be analyzed, separated by whitespace. Example: js javascript"
+            },
+            "globalAnalyzerId" : {
+              "type" : "integer",
+              "description" : "Reference a global analyzer configuration. Only possible when used on the repository level.",
+              "format" : "int32"
+            },
+            "id" : {
+              "type" : "integer",
+              "description" : "ID of the custom analyzer configuration. Only necessary when updating/deleting a configuration.",
+              "format" : "int32"
+            },
+            "issueParseRegex" : {
+              "type" : "string",
+              "description" : "A Java regular expression to parse the output of the tool. It should contain named groups for the severity level (if not provided you must specify a default severity below), the file path, the line number and the message. Example: (?<severity>.*?) (?<file>.*?):(?<line>\\d+):\\d+: (?<message>.*) will match \"ERROR /path/to/HelloWorld.java:26:27: 42 is a magic number. [MagicNumber]\""
+            },
+            "maxMergeErrors" : {
+              "type" : "integer",
+              "description" : "This is the maximum number of reported violations with severity ERROR or FATAL allowed to merge a pull request. Leave empty to always allow merging.",
+              "format" : "int32"
+            },
+            "name" : {
+              "type" : "string",
+              "description" : "This name will be used to report violations in the code of your pull requests."
+            },
+            "toolArguments" : {
+              "type" : "string",
+              "description" : "The arguments for the analyzer including a placeholder %f which will be replaced with the path to the file or %fs which will be replaced with a space-delimited list of all file paths to analyze (will only require one process to analyze your pull request compared to %f). Note that repository relative paths for config files etc. are also possible (see the following example where mycheckstyle.xml is taken from the repository). Example for using Checkstyle: -jar checkstyle-7.7-all.jar -c mycheckstyle.xml %fs"
+            },
+            "toolCommand" : {
+              "type" : "string",
+              "description" : "The path to the tool to invoke, can either be absolute (e.g. /usr/local/bin/jscs) or relative to the repository (e.g., ./node_modules/.bin/eslint)"
+            }
+          }
+        },
+        "RestBuiltinAnalyzerConfig" : {
+          "type" : "object",
+          "properties" : {
+            "configFrom" : {
+              "type" : "string",
+              "description" : "Use either built-in configuration, one from a Git repository or one from an URL or path in the file system.",
+              "enum" : [ "BUILTIN", "FROM_REPO", "FROM_URL" ]
+            },
+            "configRepoPath" : {
+              "type" : "string",
+              "description" : "The relative path to the config file in this Git repository (e.g., config/tools/pmd-all.xml)."
+            },
+            "configUrl" : {
+              "type" : "string",
+              "description" : "Provide an URL (e.g., https://github.com/pmd/pmd.xml) where the config can be fetched from or an absolute path (e.g., /home/bitbucket/pmd.xml) that is accessible in the filesystem you run Bitbucket Server on."
+            },
+            "enabled" : {
+              "type" : "boolean",
+              "description" : "Only enabled checkers will be executed when your pull requests are analyzed."
+            },
+            "maxMergeErrors" : {
+              "type" : "integer",
+              "description" : "This is the maximum number of reported violations with severity ERROR or FATAL allowed to merge a pull request. Leave empty to always allow merging.",
+              "format" : "int32"
+            },
+            "name" : {
+              "type" : "string",
+              "description" : "This is the name of the built-in static analyzer.",
+              "enum" : [ "PMD", "Scalastyle", "CodeNarc", "JSLint", "JSHint" ]
+            },
+            "violationExamplesEnabled" : {
+              "type" : "boolean",
+              "description" : "Currently only supported by PMD; when enabled, shows examples for the found violations"
+            }
+          },
+          "description" : "(Deprecated, use showCodeAnalysisInPullRequest instead) List of built-in static analyzers to use for pull requests of this repository."
+        },
+        "RestRepoConfig" : {
+          "type" : "object",
+          "properties" : {
+            "branchOptions" : {
+              "type" : "string",
+              "description" : "Configure which branches should be analyzed or which should be ignored (default is to analyze all branches).",
+              "enum" : [ "WHITE_LIST", "BLACK_LIST" ]
+            },
+            "branchOptionsBranches" : {
+              "type" : "string",
+              "description" : "You can use patterns as known from Bitbucket's branch permissions (syntax reference). Use whitespace as delimiter. Example: release-* develop"
+            },
+            "bugPredictionAlertText" : {
+              "type" : "string",
+              "description" : "(Deprecated) Commits with messages that contain matches for this regex will be considered as bug-fixing commits. Examples: \"fix(es|ed)?\" or \"fixes [A-Z]+-\\d+\"\n"
+            },
+            "bugPredictionEnabled" : {
+              "type" : "boolean",
+              "description" : "(Deprecated) This marks files that have been recognized as hotspots in pull requests with a special comment that the reviewer should take extra care when reviewing this file. The plug-ins ranks files by the number of times they have been changed with a bug-fixing commit (i.e. a commit which fixes a bug) in the past and considers the top 10% as hotspots."
+            },
+            "bugPredictionRegex" : {
+              "type" : "string",
+              "description" : "(Deprecated) This text will be shown in the pull request comment for the reviewer when a file is considered as a hotspot."
+            },
+            "builtinCheckers" : {
+              "type" : "array",
+              "description" : "(Deprecated, use showCodeAnalysisInPullRequest instead) List of built-in static analyzers to use for pull requests of this repository.",
+              "items" : {
+                "$ref" : "#/components/schemas/RestBuiltinAnalyzerConfig"
+              }
+            },
+            "pullRequestTemplatesEnabled" : {
+              "type" : "boolean",
+              "description" : "(Deprecated) Pull request templates allow you to define a template markdown text for pull request descriptions that help contributors to add the right details when they create a pull request. Just add a file PULL_REQUEST_TEMPLATE.md (or if you do not want to clutter the root directory of your project .bitbucket/PULL_REQUEST_TEMPLATE.md) to the default branch of your repository and enable this setting to get started."
+            },
+            "showCodeAnalysisInPullRequest" : {
+              "type" : "boolean",
+              "description" : "Show Code Analyzes in PullRequest. Reads the build logs to extract the analyzers results."
+            },
+            "showSeverityIcon" : {
+              "type" : "boolean",
+              "description" : "Show severity icon in pull request messages for detected code issues (takes more space compared to plain text severity)."
+            }
+          }
+        }
+      }
+    }
+  }
